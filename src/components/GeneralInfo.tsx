@@ -3,7 +3,6 @@ import EditButton from "./EditButton";
 import SubmitButton from "./SubmitButton";
 import "../styles/GeneralInfo.css";
 
-
 export default function GeneralInfo() {
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
@@ -49,7 +48,7 @@ export default function GeneralInfo() {
     setIsEditing(false);
   };
 
-  const handleEdit = (e: React.FormEvent<HTMLFormElement>) => {
+  const handleEdit = (e: React.MouseEvent<HTMLButtonElement>) => {
     e.preventDefault();
     console.log("Edit");
     setIsEditing(true);
@@ -138,7 +137,7 @@ export default function GeneralInfo() {
             </div>
           </fieldset>
           <div className="buttonContainer">
-            <SubmitButton onClick={handleSubmit}>Submit</SubmitButton>
+            <SubmitButton>Submit</SubmitButton>
             <EditButton onClick={handleEdit}>Edit</EditButton>
           </div>
         </form>
@@ -173,11 +172,10 @@ export default function GeneralInfo() {
             {postalCode}
           </p>
           <div className="buttonContainer">
-            <SubmitButton onClick={handleSubmit}>Submit</SubmitButton>
+            <SubmitButton>Submit</SubmitButton>
             <EditButton onClick={handleEdit}>Edit</EditButton>
           </div>
         </div>
-        
       )}
     </section>
   );
