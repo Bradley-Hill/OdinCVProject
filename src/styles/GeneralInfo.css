@@ -22,3 +22,10 @@
     padding: 0 10px;
     font-weight: bold;
   }
+
+  .displayInfo{
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: center;
+  }

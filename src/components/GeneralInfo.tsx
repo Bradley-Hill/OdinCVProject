@@ -1,7 +1,7 @@
-import React, {useState} from "react";
+import React, { useState } from "react";
 import Button from "./Button";
+import SubmitButton from "./SubmitButton";
 import "../styles/GeneralInfo.css";
-
 
 export default function GeneralInfo() {
   const [name, setName] = useState("");
@@ -11,7 +11,7 @@ export default function GeneralInfo() {
   const [city, setCity] = useState("");
   const [country, setCountry] = useState("");
   const [postalCode, setPostalCode] = useState("");
-  const [isEditing, setIsEditing] = useState(false);
+  const [isEditing, setIsEditing] = useState(true);
 
   const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const { name, value } = e.target;
@@ -40,52 +40,138 @@ export default function GeneralInfo() {
       default:
         break;
     }
-  }
+  };
+
+  const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
+    console.log("Form Submitted");
+    setIsEditing(false);
+  };
 
   return (
     <section className="generalInfo">
       <h2>General Information</h2>
-      <form>
-        <fieldset>
-          <legend>Personal Details</legend>
-          <div className="formGroup">
-            <label htmlFor="nameInput">Name: </label>
-            <input type="text" id="nameInput" value={name} onChange={handleInputChange}/>
-          </div>
-          <div className="formGroup">
-            <label htmlFor="emailInput">Email: </label>
-            <input type="email" id="emailInput" value={email} onChange={handleInputChange} />
-          </div>
-          <div className="formGroup">
-            <label htmlFor="phoneInput">Phone Number: </label>
-            <input type="tel" id="phoneInput" value={phone} onChange={handleInputChange} />
-          </div>
-        </fieldset>
+      {isEditing ? (
+        <form onSubmit={handleSubmit}>
+          <fieldset>
+            <legend>Personal Details</legend>
+            <div className="formGroup">
+              <label htmlFor="nameInput">Name: </label>
+              <input
+                type="text"
+                id="nameInput"
+                name="name"
+                value={name}
+                onChange={handleInputChange}
+              />
+            </div>
+            <div className="formGroup">
+              <label htmlFor="emailInput">Email: </label>
+              <input
+                type="email"
+                id="emailInput"
+                name="email"
+                value={email}
+                onChange={handleInputChange}
+              />
+            </div>
+            <div className="formGroup">
+              <label htmlFor="phoneInput">Phone Number: </label>
+              <input
+                type="tel"
+                id="phoneInput"
+                name="phone"
+                value={phone}
+                onChange={handleInputChange}
+              />
+            </div>
+          </fieldset>
 
-        <fieldset>
-          <legend>Address</legend>
-          <div className="formGroup">
-            <label htmlFor="streetInput">Street: </label>
-            <input type="text" id="streetInput" value={street} onChange={handleInputChange}/>
+          <fieldset>
+            <legend>Address</legend>
+            <div className="formGroup">
+              <label htmlFor="streetInput">Street: </label>
+              <input
+                type="text"
+                id="streetInput"
+                name="street"
+                value={street}
+                onChange={handleInputChange}
+              />
+            </div>
+            <div className="formGroup">
+              <label htmlFor="cityInput">City: </label>
+              <input
+                type="text"
+                id="cityInput"
+                name="city"
+                value={city}
+                onChange={handleInputChange}
+              />
+            </div>
+            <div className="formGroup">
+              <label htmlFor="countryInput">Country: </label>
+              <input
+                type="text"
+                id="countryInput"
+                name="country"
+                value={country}
+                onChange={handleInputChange}
+              />
+            </div>
+            <div className="formGroup">
+              <label htmlFor="postalCodeInput">Postal Code: </label>
+              <input
+                type="text"
+                id="postalCodeInput"
+                name="postalCode"
+                value={postalCode}
+                onChange={handleInputChange}
+              />
+            </div>
+          </fieldset>
+          <div className="buttonContainer">
+            <SubmitButton onClick={handleSubmit}>Submit</SubmitButton>
+            <Button />
           </div>
-          <div className="formGroup">
-            <label htmlFor="cityInput">City: </label>
-            <input type="text" id="cityInput" value={city} onChange={handleInputChange} />
+        </form>
+      ) : (
+        <div className="displayInfo">
+          <p>
+            <strong>Name: </strong>
+            {name}
+          </p>
+          <p>
+            <strong>Email: </strong>
+            {email}
+          </p>
+          <p>
+            <strong>Phone: </strong>
+            {phone}
+          </p>
+          <p>
+            <strong>Street: </strong>
+            {street}
+          </p>
+          <p>
+            <strong>City: </strong>
+            {city}
+          </p>
+          <p>
+            <strong>Country: </strong>
+            {country}
+          </p>
+          <p>
+            <strong>Postal Code: </strong>
+            {postalCode}
+          </p>
+          <div className="buttonContainer">
+            <SubmitButton onClick={handleSubmit}>Submit</SubmitButton>
+            <Button />
           </div>
-          <div className="formGroup">
-            <label htmlFor="countryInput">Country: </label>
-            <input type="text" id="countryInput" value={country} onChange={handleInputChange}/>
-          </div>
-          <div className="formGroup">
-            <label htmlFor="postalCodeInput">Postal Code: </label>
-            <input type="text" id="postalCodeInput" value={postalCode} onChange={handleInputChange}/>
-          </div>
-        </fieldset>
-        <div className="buttonContainer">
-          <Button />
-          <Button />
         </div>
-      </form>
+        
+      )}
     </section>
   );
 }
