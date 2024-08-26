@@ -1,7 +1,8 @@
 import React, { useState } from "react";
-import Button from "./Button";
+import EditButton from "./EditButton";
 import SubmitButton from "./SubmitButton";
 import "../styles/GeneralInfo.css";
+
 
 export default function GeneralInfo() {
   const [name, setName] = useState("");
@@ -46,6 +47,12 @@ export default function GeneralInfo() {
     e.preventDefault();
     console.log("Form Submitted");
     setIsEditing(false);
+  };
+
+  const handleEdit = (e: React.FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
+    console.log("Edit");
+    setIsEditing(true);
   };
 
   return (
@@ -132,7 +139,7 @@ export default function GeneralInfo() {
           </fieldset>
           <div className="buttonContainer">
             <SubmitButton onClick={handleSubmit}>Submit</SubmitButton>
-            <Button />
+            <EditButton onClick={handleEdit}>Edit</EditButton>
           </div>
         </form>
       ) : (
@@ -167,7 +174,7 @@ export default function GeneralInfo() {
           </p>
           <div className="buttonContainer">
             <SubmitButton onClick={handleSubmit}>Submit</SubmitButton>
-            <Button />
+            <EditButton onClick={handleEdit}>Edit</EditButton>
           </div>
         </div>
         
